@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Sellers</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">  <!-- Ensure the path to your CSS file is correct -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .seller-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .seller-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fafafa;
+        }
+
+        .seller-name {
+            margin: 0;
+            color: #333;
+        }
+
+        .not-shared {
+            color: #999;  /* Grey color for not shared text */
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Available Sellers</h1>
+
+        <div class="seller-list">
+    {% for seller in sellers %}
+        <div class="seller-card">
+            <h2 class="seller-name">
+                {% if seller.share_business_name %}
+                    {{ seller.business_name }}
+                {% else %}
+                    <span class="not-shared"></span>
+                {% endif %}
+            </h2>
+            <div class="seller-info">
+                <p><strong>Business Type:</strong> {% if seller.share_business_type %} {{ seller.business_type }} {% else %} <span class="not-shared"></span> {% endif %}</p>
+                <p><strong>Registration Number:</strong> {% if seller.share_registration_number %} {{ seller.registration_number }} {% else %} <span class="not-shared"></span> {% endif %}</p>
+                <p><strong>Tax ID:</strong> {% if seller.share_tax_identification_number %} {{ seller.tax_identification_number }} {% else %} <span class="not-shared"></span> {% endif %}</p>
+                <p><strong>Address:</strong> {% if seller.share_address %} {{ seller.user.address }} {% else %} <span class="not-shared"></span> {% endif %}</p>
+                <p><strong>Gender:</strong> {% if seller.share_gender %} {{ seller.user.gender }} {% else %} <span class="not-shared"></span> {% endif %}</p>
+                <p><strong>Phone Number:</strong> {% if seller.share_phone_number %} {{ seller.user.phone_number }} {% else %} <span class="not-shared"></span> {% endif %}</p>
+                <p><strong>Country:</strong> {% if seller.share_country %} {{ seller.user.country.name }} {% else %} <span class="not-shared"></span> {% endif %}</p>
+            </div>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No sellers available.</p>
+    {% endfor %}
+</div>
+
+    </div>
+</body>
+</html>

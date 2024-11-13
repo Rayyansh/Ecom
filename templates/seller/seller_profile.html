@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="hori-overlay"></div>
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+
+                            <div class="user-profile-img">
+                                <img src="{% static 'assets/images/pattern-bg.jpg' %}" class="profile-img profile-foreground-img rounded-top" style="height: 120px;" alt="">
+                                <div class="overlay-content rounded-top">
+                                    <div>
+                                        <div class="user-nav p-3">
+                                            <div class="d-flex justify-content-end">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="mt-n5 position-relative">
+                                <div class="text-center">
+                                    <img src="{{ user.profile_photo.url }}" alt="" class="avatar-xl rounded-circle img-thumbnail">
+
+                                    <div class="mt-3">
+                                        <h5 class="mb-1">{{ user.first_name }} {{ user.last_name }}</h5>
+                                        <div>
+                                            <a href="#" class="badgebg-success-subtle text-success m-1">{{ user.email }}</a>
+                                            <br>
+                                            <a href="#" class="badgebg-success-subtle text-success m-1">{{ user.address }}, {{ user.country.name }}</a>
+                                            <br>
+                                            <a href="{% url 'edit_seller_profile' %}" class="edit-button">Edit Profile</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end card body -->
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mt-3">
+                                <h3>Information</h3>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5>Personal Information</h5>
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Name:</strong></td>
+                                                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Email:</strong></td>
+                                                    <td>{{ user.email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Gender:</strong></td>
+                                                    <td>{{ user.gender }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Address:</strong></td>
+                                                    <td>{{ user.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Country:</strong></td>
+                                                    <td>{{ user.country.name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Phone Number:</strong></td>
+                                                    <td>
+                                                        {% with user.phone_number as phone %}
+                                                            {% if phone %}
+                                                                +91 {{ phone|slice:":3" }}{{ phone|slice:"3:" }}
+                                                            {% else %}
+                                                                Not provided
+                                                            {% endif %}
+                                                        {% endwith %}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <h5>Business Information</h5>
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Business Name:</strong></td>
+                                                    <td>{{ seller.business_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Business Registration Number:</strong></td>
+                                                    <td>{{ seller.registration_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Business Type:</strong></td>
+                                                    <td>{{ seller.business_type }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tax Identification Number:</strong></td>
+                                                    <td>{{ seller.tax_identification_number }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <h5>Bank Information</h5>
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Bank Name:</strong></td>
+                                                    <td>{{ seller.bank_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Account Number:</strong></td>
+                                                    <td>{{ seller.bank_account_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>IFSC Code:</strong></td>
+                                                    <td>{{ seller.bank_ifsc_code }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Branch:</strong></td>
+                                                    <td>{{ seller.bank_branch }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-3">
+                                <h5 class="card-title mb-4">Documents</h5>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="text-center">
+                                            <img src="{{ documents.aadhar_card.url }}" class="img-fluid rounded" alt="Aadhar card">
+                                            <p><strong>Expiry Date:</strong> {{ documents.aadhar_card_expiry_date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="text-center">
+                                            <img src="{{ documents.pan_card.url }}" class="img-fluid rounded" alt="Pan Card">
+                                            <p><strong>Expiry Date:</strong> {{ documents.pan_card_expiry_date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="text-center">
+                                            <img src="{{ documents.gst_licence.url }}" class="img-fluid rounded" alt="G.S.T. Licence">
+                                            <p><strong>Expiry Date:</strong> {{ documents.gst_licence_expiry_date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="text-center">
+                                            <img src="{{ documents.shop_act.url }}" class="img-fluid rounded" alt="Shop Act">
+                                            <p><strong>Expiry Date:</strong> {{ documents.shop_act_expiry_date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="text-center">
+                                            <img src="{{ documents.trade_licence.url }}" class="img-fluid rounded" alt="Trade Licence">
+                                            <p><strong>Expiry Date:</strong> {{ documents.trade_licence_expiry_date }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end card body -->
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+<!--                            <h1>Seller Dashboard</h1>-->
+
+                            {% if is_approved %}
+                                <p>Your documents are approved!</p>
+                                <form id="addProductForm" action="{% url 'seller_add_products' %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Add Product</button>
+                                </form>
+                            {% elif rejection_message %}
+                                <p>Your documents have been rejected. Please resubmit the documents from your profile.</p>
+                                <button class="btn btn-primary" disabled>Add Product</button>
+                            {% else %}
+                                <p>Your documents are under pending approval. Please wait for admin approval for add products.</p>
+                                <button class="btn btn-primary" disabled>Add Product</button>
+                            {% endif %}
+
+                            <h2>Manage Sharing Preferences</h2>
+                            <form method="POST" onsubmit="return validateForm();">
+                                {% csrf_token %}
+
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="share_business_name" {% if seller.share_business_name %} checked {% endif %}>
+                                        Share Business Name
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="share_address" {% if seller.share_address %} checked {% endif %}>
+                                        Share Address
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="share_gender" {% if seller.share_gender %} checked {% endif %}>
+                                        Share Gender
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="share_phone_number" {% if seller.share_phone_number %} checked {% endif %}>
+                                        Share Phone Number
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="share_country" {% if seller.share_country %} checked {% endif %}>
+                                        Share Country
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="share_registration_number" {% if seller.share_registration_number %} checked {% endif %}>
+                                        Share Registration Number
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="share_business_type" {% if seller.share_business_type %} checked {% endif %}>
+                                        Share Business Type
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="share_tax_identification_number" {% if seller.share_tax_identification_number %} checked {% endif %}>
+                                        Share Tax Identification Number
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Update Preferences</button>
+                            </form>
+
+                            <script>
+                                function validateForm() {
+                                    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                                    let atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+
+                                    if (!atLeastOneChecked) {
+                                        alert("Please select at least one preference.");
+                                        return false;
+                                    }
+
+                                    return true;
+                                }
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- page-content -->
+</div>
+<!-- main content end -->
+
+{% endblock %}
