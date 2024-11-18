@@ -34,69 +34,55 @@
     <link href="{% static 'assets/css/app-rtl.min.css' %}" id="app-rtl-min-style" rel="stylesheet" type="text/css" />
 
 
-    <!-- for mobile number and for country starts here -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-    <script>
-
-        // Mobile number-specific
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const phoneInput = document.querySelector("#phone_number");
-            const iti = window.intlTelInput(phoneInput, {
-                initialCountry: "auto",
-                geoIpLookup: function(callback) {
-                    fetch("https://ipinfo.io?token=YOUR_TOKEN_HERE")
-                        .then(response => response.json())
-                        .then(data => callback(data.country))
-                        .catch(() => callback("us"));
-                },
-                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
-            });
-
-            const form = document.querySelector("form");
-            form.addEventListener("submit", function (event) {
-                if (iti.isValidNumber()) {
-                    const fullPhoneNumber = iti.getNumber();
-                    const countryCode = iti.getSelectedCountryData().dialCode;
-                    const formattedPhoneNumber = `+${countryCode} ${fullPhoneNumber.replace(`+${countryCode}`, '').trim()}`;
-                    phoneInput.value = formattedPhoneNumber;
-                } else {
-                    event.preventDefault();
-                    alert("Please enter a valid phone number.");
-                }
-            });
-
-            // Country-specific document change
-
-            const countrySelect = document.querySelector("#country");
-            const documentSection = document.querySelector("#document-section");
-
-            countrySelect.addEventListener("change", function () {
-                const selectedCountry = countrySelect.value;
-
-                if (selectedCountry === "IN") {
-                    documentSection.innerHTML = `
-                        <label for="aadhar_card">Aadhaar Card</label>
-                        <input type="file" name="aadhar_card" required>
-
-                        <label for="pan_card">PAN Card</label>
-                        <input type="file" name="pan_card" required>
-                    `;
-                } else if (selectedCountry === "US") {
-                    documentSection.innerHTML = `
-                        <label for="ssn">Social Security Number (SSN)</label>
-                        <input type="text" name="ssn" required>
-                    `;
-                } else {
-                    documentSection.innerHTML = ``;
-                }
-            });
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const phoneInput = document.querySelector("#phone_number");
+        const phoneInputIntl = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                fetch("https://ipinfo.io?token=YOUR_TOKEN_HERE")
+                    .then(response => response.json())
+                    .then(data => callback(data.country))
+                    .catch(() => callback("us"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
         });
-    </script>
 
-    <!-- for mobile number and for country ends here -->
+        const alternatePhoneInput = document.querySelector("#alternate_phone_number");
+        const alternatePhoneInputIntl = window.intlTelInput(alternatePhoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                fetch("https://ipinfo.io?token=YOUR_TOKEN_HERE")
+                    .then(response => response.json())
+                    .then(data => callback(data.country))
+                    .catch(() => callback("us"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
+
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function(event) {
+            if (phoneInputIntl.isValidNumber()) {
+                phoneInput.value = phoneInputIntl.getNumber(); // Full number with country code
+            } else {
+                event.preventDefault();
+                alert("Please enter a valid phone number.");
+                return;
+            }
+
+            if (alternatePhoneInputIntl.isValidNumber()) {
+                alternatePhoneInput.value = alternatePhoneInputIntl.getNumber(); // Full number with country code
+            } else {
+                event.preventDefault();
+                alert("Please enter a valid alternate phone number.");
+                return;
+            }
+        });
+    });
+</script>
 
 
 </head>
@@ -199,9 +185,8 @@
                     <button type="button" class="btn header-item user text-start d-flex align-items-center"
                             id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="{{ user.profile_photo.url }}" alt="Header Avatar">
                         <span class="ms-2 d-none d-xl-inline-block user-item-desc">
-                            <span class="user-name">{{ user.first_name }} {{ user.last_name }}
+                            <span class="user-name">Welcome! {{ user.first_name }} {{ user.last_name }}
                                 <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </span>

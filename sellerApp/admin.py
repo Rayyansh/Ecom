@@ -9,16 +9,18 @@ class CustomUserAdmin(BaseUserAdmin):
     model = User
 
     list_display = (
-        'username', 'email', 'phone_number', 'is_seller', 'is_buyer', 'is_staff', 'is_active', 'country'
+        'username', 'email', 'phone_number', 'is_seller', 'is_buyer', 'is_staff'
     )
 
     fieldsets = (
         (None, {
-            'fields': ('username', 'email', 'password', 'first_name', 'last_name', 'gender', 'address', 'phone_number',
-                       'country', 'is_seller', 'is_buyer')
+            'fields': ('username', 'email', 'password', 'first_name', 'last_name')
+        }),
+        ('Contact Info', {
+            'fields': ('phone_number', 'alternate_mobile_number')
         }),
         ('Permissions', {
-            'fields': ('is_active', 'is_staff', 'is_superuser')
+            'fields': ('is_staff', 'is_superuser', 'is_seller', 'is_buyer')
         }),
         ('Important dates', {
             'fields': ('last_login',)
@@ -28,34 +30,29 @@ class CustomUserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'gender', 'address',
-                       'phone_number', 'country', 'is_seller', 'is_buyer')
+            'fields': ('username', 'email', 'first_name', 'last_name',
+                       'phone_number', 'alternate_mobile_number', 'is_seller', 'is_buyer')
         }),
     )
 
     search_fields = ('email', 'username')
-    ordering = ('email',)
 
+    ordering = ('email',)
 
 
 admin.site.register(User, CustomUserAdmin)
 
 
-@admin.register(Seller)
-class SellerAdmin(admin.ModelAdmin):
-    list_display = ('business_name', 'user', 'registration_number', 'business_type')
-    search_fields = ('business_name', 'user__username')
-    list_filter = ('business_type',)
-
-
 # Rejection or approval mail body is here
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('user', 'is_approved', 'rejection_note')
-    fields = ('user', 'aadhar_card', 'aadhar_card_expiry_date',
-              'pan_card', 'pan_card_expiry_date',
-              'gst_licence', 'gst_licence_expiry_date',
-              'shop_act', 'shop_act_expiry_date',
-              'trade_licence', 'trade_licence_expiry_date',
+    fields = ('user',
+
+              'business_registration_document', 'business_registration_document_expiry_date',
+              'tax_identification_document', 'tax_identification_document_expiry_date',
+              'proof_of_business_address', 'proof_of_business_address_expiry_date',
+              'authorized_signatory_id', 'authorized_signatory_id_expiry_date',
+
               'is_approved', 'rejection_note')
 
     def save_model(self, request, obj, form, change):
@@ -87,3 +84,9 @@ class DocumentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Document, DocumentAdmin)
+
+admin.site.register(Seller)
+admin.site.register(TeamMember)
+admin.site.register(ProductUploadMethod)
+admin.site.register(TermsAndConditions)
+admin.site.register(SellerBank)

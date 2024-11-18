@@ -15,253 +15,602 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Forms Steps</h4>
+                            <h4 class="card-title">Seller Signup Form</h4>
                         </div><!-- end card header -->
                         <div class="card-body">
 
-                            <form method="POST" enctype="multipart/form-data">
+                        <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
-    <!-- Wizard Navigation -->
-    <ul class="wizard-nav mb-5">
-        <li class="wizard-list-item">
-            <div class="list-item">
-                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Personal Details">
-                    <i class="uil uil-user"></i>
-                </div>
-            </div>
-        </li>
-        <li class="wizard-list-item">
-            <div class="list-item">
-                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Business Info">
-                    <i class="uil uil-building"></i>
-                </div>
-            </div>
-        </li>
-        <li class="wizard-list-item">
-            <div class="list-item">
-                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Documents">
-                    <i class="uil uil-file-alt"></i>
-                </div>
-            </div>
-        </li>
 
-    </ul>
+                                <!-- Wizard Navigation -->
+                                <ul class="wizard-nav mb-5">
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Personal Details">
+                                                    <i class="uil uil-user-circle"></i> <!-- User Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-    <!-- Step 1: Personal Details -->
-    <div class="wizard-tab">
-        <div class="text-center mb-4">
-            <h5>Personal Details</h5>
-            <p class="card-title-desc">Fill all information below</p>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="first_name" placeholder="Enter First Name" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
-                </div>
-            </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Business Information">
+                                                    <i class="uil uil-briefcase"></i> <!-- Business Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-            <div class="col-lg-12">
-                <div class="mb-3">
-                    <label for="phone_number" class="form-label">Phone Number</label>
-                    <input id="phone_number" type="tel" name="phone_number" class="form-control" required>
-                </div>
-            </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Documents">
+                                                    <i class="uil uil-file-check"></i> <!-- Document Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Gender</label>
-                    <select class="form-select" name="gender" required>
-                        <option selected disabled>Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-            </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Bank Details">
+                                                    <i class="uil uil-university"></i> <!-- Bank Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label for="country" class="form-label">Country</label>
-                    <select class="form-select" name="country" id="country" required>
-                    {% for country_code, country_name in countries %}
-                <option value="{{ country_code }}"
-                    {% if country_code == request.POST.country or country_code == default_country %}
-                        selected
-                    {% endif %}>
-                    {{ country_name }}
-                </option>
-                    {% endfor %}
-</select>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Team Members">
+                                                    <i class="uil uil-users-alt"></i> <!-- Team Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-                </div>
-            </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Product Upload Method">
+                                                    <i class="uil uil-upload-alt"></i> <!-- Upload Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-            <div class="col-lg-12">
-                <div class="mb-3">
-                    <label class="form-label">Address</label>
-                    <textarea class="form-control" name="address" rows="2" placeholder="Enter Address" required></textarea>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="mb-3">
-                    <label class="form-label">Profile Photo</label>
-                    <input type="file" class="form-control" name="profile_photo" accept="image/*" required>
-                </div>
-            </div>
-        </div>
-    </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Terms and Conditions">
+                                                    <i class="uil uil-file-check"></i> <!-- Terms Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-    <!-- Step 2: Business Info -->
-    <div class="wizard-tab">
-        <div class="text-center mb-4">
-            <h5>Business Info</h5>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Business Name</label>
-                    <input type="text" class="form-control" name="business_name" placeholder="Enter Business Name" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Registration Number</label>
-                    <input type="text" class="form-control" name="registration_number" placeholder="Enter Registration Number" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Business Type</label>
-                    <input type="text" class="form-control" name="business_type" placeholder="Enter Business Type" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Tax Identification Number</label>
-                    <input type="text" class="form-control" name="tax_identification_number" placeholder="Enter Tax ID" required>
-                </div>
-            </div>
-             <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Bank Name</label>
-                    <input type="text" class="form-control" name="bank_name" placeholder="Enter Bank Name" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Account Number</label>
-                    <input type="text" class="form-control" name="bank_account_number" placeholder="Enter Account Number" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">IFSC Code</label>
-                    <input type="text" class="form-control" name="bank_ifsc_code" placeholder="Enter IFSC Code" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Branch</label>
-                    <input type="text" class="form-control" name="bank_branch" placeholder="Enter Branch Name" required>
-                </div>
-            </div>
-        </div>
-    </div>
 
-     <div class="wizard-tab">
-        <div class="text-center mb-4">
-            <h5>Document</h5>
-        </div>
-        <div class="row">
+                                </ul>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Aadhar Card</label>
-                    <input type="file" class="form-control" name="aadhar_card" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Aadhar Card Expiry Date</label>
-                    <input type="date" class="form-control" name="aadhar_card_expiry_date" required>
-                </div>
-            </div>
+                                <!-- Step 1: Personal Details -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Personal Details</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">First Name</label>
+                                                <input type="text" class="form-control" name="first_name" placeholder="Enter First Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
+                                            </div>
+                                        </div>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Pan Card</label>
-                    <input type="file" class="form-control" name="pan_card" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Pan Card Expiry Date</label>
-                    <input type="date" class="form-control" name="pan_card_expiry_date" required>
-                </div>
-            </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="phone_number" class="form-label">Phone Number</label>
+                                                <input id="phone_number" type="tel" name="phone_number" class="form-control" required>
+                                            </div>
+                                        </div>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">G.S.T. Licence</label>
-                    <input type="file" class="form-control" name="gst_licence" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">G.S.T. Licence Expiry Date</label>
-                    <input type="date" class="form-control" name="gst_licence_expiry_date" required>
-                </div>
-            </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="alternate_phone_number" class="form-label">Alternate Phone Number</label>
+                                                <input id="alternate_phone_number" type="tel" name="alternate_mobile_number" class="form-control" required>
+                                            </div>
+                                        </div>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Shop Act</label>
-                    <input type="file" class="form-control" name="shop_act" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Shop Act Expiry Date</label>
-                    <input type="date" class="form-control" name="shop_act_expiry_date" required>
-                </div>
-            </div>
+                                    </div>
+                                </div>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Trade Licence</label>
-                    <input type="file" class="form-control" name="trade_licence" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Trade Licence</label>
-                    <input type="date" class="form-control" name="trade_licence_expiry_date" required>
-                </div>
-            </div>
+                                <!-- Step 2: Business Information -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Business Information</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Business Name</label>
+                                                <input type="text" class="form-control" name="business_name" placeholder="Enter Business Name" required>
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Business Type</label>
+                                                    <select class="form-control" name="business_type" required>
+                                                        <option value="" disabled selected>Select Business Type</option>
+                                                        <option value="Sole Establishment/Sole Proprietorship">Sole Establishment/Sole Proprietorship</option>
+                                                        <option value="Civil Company">Civil Company</option>
+                                                        <option value="Limited Liability Company (LLC)">Limited Liability Company (LLC)</option>
+                                                        <option value="Free Zone Company">Free Zone Company</option>
+                                                        <option value="Free Zone Establishment (FZE)">Free Zone Establishment (FZE)</option>
+                                                        <option value="Free Zone Company (FZC) or Free Zone LLC (FZ LLC)">Free Zone Company (FZC) or Free Zone LLC (FZ LLC)</option>
+                                                        <option value="Branch Office of a Foreign Company">Branch Office of a Foreign Company</option>
+                                                        <option value="Representative Office">Representative Office</option>
+                                                        <option value="Public Joint Stock Company (PJSC)">Public Joint Stock Company (PJSC)</option>
+                                                        <option value="Private Joint Stock Company (PrJSC)">Private Joint Stock Company (PrJSC)</option>
+                                                        <option value="Offshore Company">Offshore Company</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-        </div>
-    </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Business Registration Number</label>
+                                                <input type="text" class="form-control" name="business_registration_number" placeholder="Enter Business Registration Number" required>
+                                            </div>
+                                        </div>
 
-    <!-- Navigation buttons -->
-<div class="d-flex align-items-start gap-3 mt-4">
-    <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-    <button type="button" class="btn btn-primary ms-auto" id="nextBtn" onclick="nextPrev(1)">Next</button>
-    <button type="submit" class="btn btn-primary ms-auto" id="submitBtn" style="display: none;">Submit</button>
-</div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Date of Business Establishment</label>
+                                                <input type="date" class="form-control" name="date_of_business_establishment">
+                                            </div>
+                                        </div>
 
-</form>
+                                         <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Address Line 1</label>
+                                                <input type="text" class="form-control" name="address_line_1" placeholder="Enter Address Line 1" required>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Address Line 2</label>
+                                                <input type="text" class="form-control" name="address_line_2" placeholder="Enter Address Line 2" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">City</label>
+                                                <input type="text" class="form-control" name="city" placeholder="Enter City Name" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">State</label>
+                                                <input type="text" class="form-control" name="state" placeholder="Enter State/Province Name" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Country</label>
+                                                <select class="form-control" name="seller_country" required>
+                                                    {% load countries %}
+                                                    <option value="" disabled selected>Select Your Country</option>
+                                                    {% for code, name in countries %}
+                                                        <option value="{{ code }}">{{ name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Postal Code</label>
+                                                <input type="text" class="form-control" name="postal_code" maxlength="6" placeholder="Enter Postal Code" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Your Website URL (optional)</label>
+                                                <input type="text" class="form-control" name="website_url" placeholder="Enter Your Website URL (optional)">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Business Category</label>
+                                                <select class="form-control" name="business_category" required>
+                                                    <option value="" disabled selected>Select Business Category</option>
+                                                    <option value="Fashion & Accessories">Fashion & Accessories</option>
+                                                    <option value="Electronics">Electronics</option>
+                                                    <option value="Home & Kitchen">Home & Kitchen</option>
+                                                    <option value="Health & Beauty">Health & Beauty</option>
+                                                    <option value="Sports & Outdoors">Sports & Outdoors</option>
+                                                    <option value="Toys & Games">Toys & Games</option>
+                                                    <option value="Arts & Crafts">Arts & Crafts</option>
+                                                    <option value="Books & Media">Books & Media</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Brand Information</label>
+                                                <textarea class="form-control" name="brand_information" placeholder="Brand Information (optional)" rows="4"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Step 3: Documents upload -->
+                                 <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Documents</h5>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Business Registration Document</label>
+                                                <input type="file" class="form-control" name="business_registration_document" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Business Registration Document Expiry Date</label>
+                                                <input type="date" class="form-control" name="business_registration_document_expiry_date" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Tax Identification Document</label>
+                                                <input type="file" class="form-control" name="tax_identification_document" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Tax Identification Document Expiry Date</label>
+                                                <input type="date" class="form-control" name="tax_identification_document_expiry_date" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Proof of Business Address</label>
+                                                <input type="file" class="form-control" name="proof_of_business_address" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Proof of Business Address Expiry Date</label>
+                                                <input type="date" class="form-control" name="proof_of_business_address_expiry_date" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Authorized Signatory ID</label>
+                                                <input type="file" class="form-control" name="authorized_signatory_id" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Authorized Signatory ID</label>
+                                                <input type="date" class="form-control" name="authorized_signatory_id_expiry_date" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Step 4: Bank Details -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Bank Details</h5>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Bank Name</label>
+                                                <input type="text" class="form-control" name="bank_name" placeholder="Bank Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Bank Account Number</label>
+                                                <input type="text" class="form-control" name="bank_account_number" placeholder="Bank Account Number" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Swift/BIC Code</label>
+                                                <input type="text" class="form-control" name="swift_bic_code" placeholder="Swift/BIC Code" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Account Holder Name</label>
+                                                <input type="text" class="form-control" name="account_holder_name" placeholder="Account Holder Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Bank Address (optional)</label>
+                                                <textarea class="form-control" name="bank_address" placeholder="Bank Address (optional)" rows="4"></textarea>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Step 5: Team Members -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Team Members</h5>
+                                        <p>Add your team members here (optional)</p>
+                                    </div>
+                                    <div class="row">
+
+                                    <!-- first team member data starts here-->
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_1" placeholder="Enter Full Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_1" placeholder="Enter Email">
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_1">
+                                                        <option value="" disabled selected>Team Mate Role</option>
+
+                                                        <option value="Product Manager">Product Manager</option>
+                                                        <option value="Order Fulfillment">Order Fulfillment</option>
+                                                        <option value="Finance">Finance</option>
+                                                        <option value="Admin">Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        <!-- second team member data starts here-->
+                                                    <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_2" placeholder="Enter Full Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_2" placeholder="Enter Email">
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_2">
+                                                        <option value="" disabled selected>Team Mate Role</option>
+
+                                                        <option value="Product Manager">Product Manager</option>
+                                                        <option value="Order Fulfillment">Order Fulfillment</option>
+                                                        <option value="Finance">Finance</option>
+                                                        <option value="Admin">Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        <!-- third team member data starts here-->
+                                                    <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_3" placeholder="Enter Full Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_3" placeholder="Enter Email">
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_3">
+                                                        <option value="" disabled selected>Team Mate Role</option>
+
+                                                        <option value="Product Manager">Product Manager</option>
+                                                        <option value="Order Fulfillment">Order Fulfillment</option>
+                                                        <option value="Finance">Finance</option>
+                                                        <option value="Admin">Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        <!-- fourth team member data starts here-->
+                                                    <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_4" placeholder="Enter Full Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_4" placeholder="Enter Email">
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_4">
+                                                        <option value="" disabled selected>Team Mate Role</option>
+
+                                                        <option value="Product Manager">Product Manager</option>
+                                                        <option value="Order Fulfillment">Order Fulfillment</option>
+                                                        <option value="Finance">Finance</option>
+                                                        <option value="Admin">Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        <!-- fifth team member data starts here-->
+                                                    <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_5" placeholder="Enter Full Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_5" placeholder="Enter Email">
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_5">
+                                                        <option value="" disabled selected>Team Mate Role</option>
+
+                                                        <option value="Product Manager">Product Manager</option>
+                                                        <option value="Order Fulfillment">Order Fulfillment</option>
+                                                        <option value="Finance">Finance</option>
+                                                        <option value="Admin">Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Step 6: Product Upload Method -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Product Upload Method</h5>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                             <div class="mb-3">
+                                                  <label class="form-label">Product Upload Method</label>
+                                                  <select class="form-control" name="upload_method">
+                                                  <option value="" disabled selected>Select Your Product Upload Method</option>
+
+                                                  <option value="Manual Product Upload">Manual Product Upload</option>
+                                                  <option value="Bulk Product Upload (CSV/Excel)">Bulk Product Upload (CSV/Excel)</option>
+                                                  <option value="Sync with Existing Website/CRM">Sync with Existing Website/CRM</option>
+                                               </select>
+                                             </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                             <div class="mb-3">
+                                                  <label class="form-label">Preferred Shipping Method</label>
+                                                  <select class="form-control" name="preferred_shipping_method">
+                                                  <option value="" disabled selected>Select Your Product Upload Method</option>
+
+                                                  <option value="Self-Managed Shipping">Self-Managed Shipping</option>
+                                                  <option value="World2Door Shipping Services">World2Door Shipping Services</option>
+                                               </select>
+                                             </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Platform Type (optional)</label>
+                                                <input type="text" class="form-control" name="platform_type" placeholder="Mention Your Platform Type (optional)">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">API Keys (optional)</label>
+                                                <input type="text" class="form-control" name="api_keys" placeholder="Provide If You Have Any API Keys (optional)">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Technical Contact Name (optional)</label>
+                                                <input type="text" class="form-control" name="technical_contact_name" placeholder="Provide Technical Contact Person Name (optional)">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Technical Contact Email (optional)</label>
+                                                <input type="text" class="form-control" name="technical_contact_email" placeholder="Provide Technical Team Contact Email (optional)">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Technical Contact Phone (optional)</label>
+                                                <input type="text" class="form-control" name="technical_contact_phone" placeholder="Provide Technical Team Contact Phone (optional)">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <!-- Step 7: Terms and Conditions -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Terms and Conditions</h5>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Agreement Section -->
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="agreement" name="agreement" required>
+                                                <label class="form-check-label" for="agreement">
+                                                    ● Compliance with local and international e-commerce regulations.<br>
+                                                    ● Adhering to fair trade practices and product listing policies.<br>
+                                                    ● Following World2Door’s return and refund policies for customer orders.<br>
+                                                    ● Ensuring all information provided is accurate and up-to-date.<br>
+                                                    ● Please check this box to confirm that you agree to these terms.
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Signature Section -->
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="signature" name="signature" required>
+                                                <label class="form-check-label" for="signature">
+                                                    ● I hereby confirm my signature as a digital acceptance of the above terms.
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Navigation buttons -->
+                            <div class="d-flex align-items-start gap-3 mt-4">
+                                <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                                <button type="button" class="btn btn-primary ms-auto" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                <button type="submit" class="btn btn-primary ms-auto" id="submitBtn" style="display: none;">Submit</button>
+                            </div>
+
+                        </form>
 
             {% if messages %}
                 <script>
@@ -281,7 +630,6 @@
                     showErrorAlerts(errors);
                 </script>
             {% endif %}
-
 
                         </div>
                     </div>

@@ -56,24 +56,83 @@
     <div class="container">
         <h1>Available Sellers</h1>
 
-        <div class="seller-list">
+       <div class="seller-list">
     {% for seller in sellers %}
         <div class="seller-card">
             <h2 class="seller-name">
                 {% if seller.share_business_name %}
                     {{ seller.business_name }}
                 {% else %}
-                    <span class="not-shared"></span>
+                    <span class="not-shared">Not shared</span>
                 {% endif %}
             </h2>
             <div class="seller-info">
-                <p><strong>Business Type:</strong> {% if seller.share_business_type %} {{ seller.business_type }} {% else %} <span class="not-shared"></span> {% endif %}</p>
-                <p><strong>Registration Number:</strong> {% if seller.share_registration_number %} {{ seller.registration_number }} {% else %} <span class="not-shared"></span> {% endif %}</p>
-                <p><strong>Tax ID:</strong> {% if seller.share_tax_identification_number %} {{ seller.tax_identification_number }} {% else %} <span class="not-shared"></span> {% endif %}</p>
-                <p><strong>Address:</strong> {% if seller.share_address %} {{ seller.user.address }} {% else %} <span class="not-shared"></span> {% endif %}</p>
-                <p><strong>Gender:</strong> {% if seller.share_gender %} {{ seller.user.gender }} {% else %} <span class="not-shared"></span> {% endif %}</p>
-                <p><strong>Phone Number:</strong> {% if seller.share_phone_number %} {{ seller.user.phone_number }} {% else %} <span class="not-shared"></span> {% endif %}</p>
-                <p><strong>Country:</strong> {% if seller.share_country %} {{ seller.user.country.name }} {% else %} <span class="not-shared"></span> {% endif %}</p>
+                <p><strong>Business Type:</strong>
+                    {% if seller.share_business_type %}
+                        {{ seller.business_type }}
+                    {% else %}
+                        <span class="not-shared">Not shared</span>
+                    {% endif %}
+                </p>
+
+                <p><strong>Registration Number:</strong>
+                    {% if seller.share_registration_number %}
+                        {{ seller.business_registration_number }}
+                    {% else %}
+                        <span class="not-shared">Not shared</span>
+                    {% endif %}
+                </p>
+
+
+                <!-- Address Details -->
+                <p><strong>Address Line 1:</strong>
+                    {% if seller.share_address_line_1 %}
+                        {{ seller.address_line_1 }}
+                    {% else %}
+                        <span class="not-shared">Not shared</span>
+                    {% endif %}
+                </p>
+
+                <p><strong>Address Line 2:</strong>
+                    {% if seller.share_address_line_2 %}
+                        {{ seller.address_line_2 }}
+                    {% else %}
+                        <span class="not-shared">Not shared</span>
+                    {% endif %}
+                </p>
+
+                <p><strong>City:</strong>
+                    {% if seller.share_city %}
+                        {{ seller.city }}
+                    {% else %}
+                        <span class="not-shared">Not shared</span>
+                    {% endif %}
+                </p>
+
+                <p><strong>State:</strong>
+                    {% if seller.share_state %}
+                        {{ seller.state }}
+                    {% else %}
+                        <span class="not-shared">Not shared</span>
+                    {% endif %}
+                </p>
+
+                <p><strong>Country:</strong>
+                    {% if seller.share_seller_country %}
+                        {{ seller.seller_country.name }}
+                    {% else %}
+                        <span class="not-shared">Not shared</span>
+                    {% endif %}
+                </p>
+
+                <p><strong>Postal Code:</strong>
+                    {% if seller.share_postal_code %}
+                        {{ seller.postal_code }}
+                    {% else %}
+                        <span class="not-shared">Not shared</span>
+                    {% endif %}
+                </p>
+
             </div>
         </div>
         <hr>
@@ -81,6 +140,7 @@
         <p>No sellers available.</p>
     {% endfor %}
 </div>
+
 
     </div>
 </body>

@@ -16,7 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'adminApp',
+    'sellerApp',
     'django_countries'
 ]
 
@@ -81,36 +81,42 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
-STATIC_ROOT = '/EcommerceVendors/static/'
+STATIC_ROOT = '/static/'
 
-MEDIA_ROOT = '/EcommerceVendors/media/'
+MEDIA_ROOT = '/media/'
 MEDIA_URL = 'media/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'adminApp.User'
+AUTH_USER_MODEL = 'sellerApp.User'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'harshadkumbhar28@gmail.com'
-# EMAIL_HOST_PASSWORD = 'tlrf bisv gqms mvqq'
-# DEFAULT_FROM_EMAIL = 'harshadkumbhar28@gmail.com'
-
-
-EMAIL_BACKEND = 'django_ses.SESBackend'
-
-EMAIL_HOST = 'email-smtp.ap-south-1.amazonaws.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'harshadkumbhar28@gmail.com'
+EMAIL_HOST_PASSWORD = 'tlrf bisv gqms mvqq'
+DEFAULT_FROM_EMAIL = 'harshadkumbhar28@gmail.com'
 
-EMAIL_HOST_USER = 'AKIAWN26JQPDJJWZVZG2'
-EMAIL_HOST_PASSWORD = 'BIohxKqlzH4VDX6RFmcxG+XKT/emYfzu8z3y/2wJvo7r'
 
-DEFAULT_FROM_EMAIL = 'seller@world2door.com'
+# EMAIL_BACKEND = 'django_ses.SESBackend'
+#
+# AWS_ACCESS_KEY_ID = 'AKIAWN26JQPDHZA7ZULH'
+# AWS_SECRET_ACCESS_KEY = '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'
+#
+# AWS_SES_REGION_NAME = 'ap-south-1'
+# AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
+#
+# EMAIL_HOST = 'email-smtp.ap-south-1.amazonaws.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+#
+# EMAIL_HOST_USER = 'AKIAWN26JQPDJJWZVZG2'
+# EMAIL_HOST_PASSWORD = 'BIohxKqlzH4VDX6RFmcxG+XKT/emYfzu8z3y/2wJvo7r'
+#
+# DEFAULT_FROM_EMAIL = 'seller@world2door.com'
 

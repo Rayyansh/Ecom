@@ -15,297 +15,629 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Forms Steps</h4>
+                            <h4 class="card-title">Seller Edit Form</h4>
                         </div><!-- end card header -->
                         <div class="card-body">
 
-                            <form method="POST" enctype="multipart/form-data">
+                        <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
-    <!-- Wizard Navigation -->
-    <ul class="wizard-nav mb-5">
-        <li class="wizard-list-item">
-            <div class="list-item">
-                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Personal Details">
-                    <i class="uil uil-user"></i>
-                </div>
-            </div>
-        </li>
-        <li class="wizard-list-item">
-            <div class="list-item">
-                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Business Info">
-                    <i class="uil uil-building"></i>
-                </div>
-            </div>
-        </li>
-        <li class="wizard-list-item">
-            <div class="list-item">
-                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Documents">
-                    <i class="uil uil-file-alt"></i>
-                </div>
-            </div>
-        </li>
 
-    </ul>
+                                <!-- Wizard Navigation -->
+                                <ul class="wizard-nav mb-5">
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Personal Details">
+                                                    <i class="uil uil-user-circle"></i> <!-- User Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-    <!-- Step 1: Personal Details -->
-    <div class="wizard-tab">
-        <div class="text-center mb-4">
-            <h5>Personal Details</h5>
-            <p class="card-title-desc">Fill all information below</p>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" value="{{ user.email }}" required>
-                </div>
-            </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Business Information">
+                                                    <i class="uil uil-briefcase"></i> <!-- Business Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-            <div class="col-lg-12">
-                <div class="mb-3">
-                    <label for="phone_number" class="form-label">Phone Number</label>
-                    <input id="phone_number" type="tel" name="phone_number" value="{{ user.phone_number }}" class="form-control" required>
-                </div>
-            </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Documents">
+                                                    <i class="uil uil-file-check"></i> <!-- Document Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label" for="gender">Gender</label>
-                    <select class="form-select" name="gender" required>
-                        <option selected disabled>Select Gender</option>
-                        <option value="Male" {% if user.gender == 'Male' %}selected{% endif %}>Male</option>
-                        <option value="Female" {% if user.gender == 'Female' %}selected{% endif %}>Female</option>
-                    </select>
-                </div>
-            </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Bank Details">
+                                                    <i class="uil uil-university"></i> <!-- Bank Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label for="country" class="form-label">Country</label>
-                    <select class="form-select" name="country" id="country" required>
-                        <option selected disabled>Select Country</option>
-                        {% for country_code, country_name in countries %}
-                            <option value="{{ country_code }}" {% if country_code == user.country %}selected{% endif %}>{{ country_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Team Members">
+                                                    <i class="uil uil-users-alt"></i> <!-- Team Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-            <div class="col-lg-12">
-                <div class="mb-3">
-                    <label class="form-label">Address</label>
-                    <textarea class="form-control" name="address" rows="2" required>{{ user.address }}</textarea>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="mb-3">
-                    <label class="form-label">Current Profile Photo</label>
-                    {% if user.profile_photo %}
-                        <img src="{{ user.profile_photo.url }}" alt="Current Profile Photo" class="img-thumbnail" style="width: 100px; height: 100px;">
-                    {% endif %}
-                    <input type="file" class="form-control" name="profile_photo" accept="image/*">
-                </div>
-            </div>
-        </div>
-    </div>
+                                        <li class="wizard-list-item">
+                                            <div class="list-item">
+                                                <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Product Upload Method">
+                                                    <i class="uil uil-upload-alt"></i> <!-- Upload Icon -->
+                                                </div>
+                                            </div>
+                                        </li>
 
-    <!-- Step 2: Business Info -->
-    <div class="wizard-tab">
-        <div class="text-center mb-4">
-            <h5>Business Info</h5>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Business Name</label>
-                    <input type="text" class="form-control" name="business_name" value="{{ seller.business_name }}" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Registration Number</label>
-                    <input type="text" class="form-control" name="registration_number" value="{{ seller.registration_number }}" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Business Type</label>
-                    <input type="text" class="form-control" name="business_type" value="{{ seller.business_type }}" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Tax Identification Number</label>
-                    <input type="text" class="form-control" name="tax_identification_number" value="{{ seller.tax_identification_number }}" required>
-                </div>
-            </div>
-             <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Bank Name</label>
-                    <input type="text" class="form-control" name="bank_name" value="{{ seller.bank_name }}" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Account Number</label>
-                    <input type="text" class="form-control" name="bank_account_number" value="{{ seller.bank_account_number }}" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">IFSC Code</label>
-                    <input type="text" class="form-control" name="bank_ifsc_code" value="{{ seller.bank_ifsc_code }}" required>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Branch</label>
-                    <input type="text" class="form-control" name="bank_branch" value="{{ seller.bank_branch }}" required>
-                </div>
-            </div>
-        </div>
-    </div>
+                                </ul>
 
-     <div class="wizard-tab">
-        <div class="text-center mb-4">
-            <h5>Document</h5>
-        </div>
-        <div class="row">
+                                <!-- Step 1: Personal Details -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Personal Details</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">First Name</label>
+                                                <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" class="form-control" name="email" value="{{ user.email }}" required>
+                                            </div>
+                                        </div>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Aadhar Card</label>
-                    {% if documents.aadhar_card %}
-                        <img src="{{ documents.aadhar_card.url }}" alt="Current Aadhar Card" class="img-thumbnail" style="width: 100px; height: 100px;">
-                    {% endif %}
-                    <input type="file" class="form-control" name="aadhar_card" accept="image/*">
-                </div>
-            </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="phone_number" class="form-label">Phone Number</label>
+                                                <input id="phone_number" type="tel" name="phone_number" class="form-control" value="{{ user.phone_number }}" required>
+                                            </div>
+                                        </div>
 
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label" for="aadhar_card_expiry_date">Aadhar Card Expiry Date</label>
-                <input type="date" class="form-control" name="aadhar_card_expiry_date" id="aadhar_card_expiry_date"
-                       value="{{ documents.aadhar_card_expiry_date|date:'Y-m-d' }}" required>
-              </div>
-            </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="alternate_phone_number" class="form-label">Alternate Phone Number</label>
+                                                <input id="alternate_phone_number" type="tel" name="alternate_mobile_number" value="{{ user.alternate_mobile_number }}" class="form-control" required>
+                                            </div>
+                                        </div>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Pan Card</label>
-                    {% if documents.pan_card %}
-                        <img src="{{ documents.pan_card.url }}" alt="Current Pan Card" class="img-thumbnail" style="width: 100px; height: 100px;">
-                    {% endif %}
-                    <input type="file" class="form-control" name="pan_card" accept="image/*">
-                </div>
-            </div>
+                                    </div>
+                                </div>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Pan Card Expiry Date</label>
-                    <input type="date" class="form-control" name="pan_card_expiry_date" id="pan_card_expiry_date"
-                       value="{{ documents.pan_card_expiry_date|date:'Y-m-d' }}" required>
-                </div>
-            </div>
+                                <!-- Step 2: Business Information -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Business Information</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Business Name</label>
+                                                <input type="text" class="form-control" name="business_name" value="{{ seller.business_name }}" required>
+                                            </div>
+                                        </div>
 
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">G.S.T. Licence</label>
-                    {% if documents.gst_licence %}
-                        <img src="{{ documents.gst_licence.url }}" alt="G.S.T. Licence" class="img-thumbnail" style="width: 100px; height: 100px;">
-                    {% endif %}
-                    <input type="file" class="form-control" name="gst_licence" accept="image/*">
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">G.S.T. Licence Expiry Date</label>
-                    <input type="date" class="form-control" name="gst_licence_expiry_date" id="gst_licence_expiry_date"
-                       value="{{ documents.gst_licence_expiry_date|date:'Y-m-d' }}" required>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Shop Act</label>
-                    {% if documents.shop_act %}
-                        <img src="{{ documents.shop_act.url }}" alt="Shop Act" class="img-thumbnail" style="width: 100px; height: 100px;">
-                    {% endif %}
-                    <input type="file" class="form-control" name="shop_act" accept="image/*">
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Shop Act Expiry Date</label>
-                    <input type="date" class="form-control" name="shop_act_expiry_date" id="shop_act_expiry_date"
-                       value="{{ documents.shop_act_expiry_date|date:'Y-m-d' }}" required>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Trade Licence</label>
-                    {% if documents.trade_licence %}
-                        <img src="{{ documents.trade_licence.url }}" alt="Trade Licence" class="img-thumbnail" style="width: 100px; height: 100px;">
-                    {% endif %}
-                    <input type="file" class="form-control" name="trade_licence" accept="image/*">
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="form-label">Trade Licence</label>
-                    <input type="date" class="form-control" name="trade_licence_expiry_date" id="trade_licence_expiry_date"
-                       value="{{ documents.trade_licence_expiry_date|date:'Y-m-d' }}" required>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Navigation buttons -->
-<div class="d-flex align-items-start gap-3 mt-4">
-    <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-    <button type="button" class="btn btn-primary ms-auto" id="nextBtn" onclick="nextPrev(1)">Next</button>
-    <button type="submit" class="btn btn-primary ms-auto" id="submitBtn" style="display: none;">Submit</button>
-</div>
-
-</form>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Business Type</label>
+                                            <select class="form-control" name="business_type" required>
+                                                <option value="" disabled {% if seller.business_type == '' %}selected{% endif %}>Select Business Type</option>
+                                                <option value="Sole Establishment/Sole Proprietorship" {% if seller.business_type == 'Sole Establishment/Sole Proprietorship' %}selected{% endif %}>Sole Establishment/Sole Proprietorship</option>
+                                                <option value="Civil Company" {% if seller.business_type == 'Civil Company' %}selected{% endif %}>Civil Company</option>
+                                                <option value="Limited Liability Company (LLC)" {% if seller.business_type == 'Limited Liability Company (LLC)' %}selected{% endif %}>Limited Liability Company (LLC)</option>
+                                                <option value="Free Zone Company" {% if seller.business_type == 'Free Zone Company' %}selected{% endif %}>Free Zone Company</option>
+                                                <option value="Free Zone Establishment (FZE)" {% if seller.business_type == 'Free Zone Establishment (FZE)' %}selected{% endif %}>Free Zone Establishment (FZE)</option>
+                                                <option value="Free Zone Company (FZC) or Free Zone LLC (FZ LLC)" {% if seller.business_type == 'Free Zone Company (FZC) or Free Zone LLC (FZ LLC)' %}selected{% endif %}>Free Zone Company (FZC) or Free Zone LLC (FZ LLC)</option>
+                                                <option value="Branch Office of a Foreign Company" {% if seller.business_type == 'Branch Office of a Foreign Company' %}selected{% endif %}>Branch Office of a Foreign Company</option>
+                                                <option value="Representative Office" {% if seller.business_type == 'Representative Office' %}selected{% endif %}>Representative Office</option>
+                                                <option value="Public Joint Stock Company (PJSC)" {% if seller.business_type == 'Public Joint Stock Company (PJSC)' %}selected{% endif %}>Public Joint Stock Company (PJSC)</option>
+                                                <option value="Private Joint Stock Company (PrJSC)" {% if seller.business_type == 'Private Joint Stock Company (PrJSC)' %}selected{% endif %}>Private Joint Stock Company (PrJSC)</option>
+                                                <option value="Offshore Company" {% if seller.business_type == 'Offshore Company' %}selected{% endif %}>Offshore Company</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
 
-            {% if messages %}
-                <script>
-                    const errors = [];
-                    {% for message in messages %}
-                        errors.push("{{ message }}");
-                    {% endfor %}
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Business Registration Number</label>
+                                                <input type="text" class="form-control" name="business_registration_number" value="{{ seller.business_registration_number }}" required>
+                                            </div>
+                                        </div>
 
-                    function showErrorAlerts(errors) {
-                        if (errors.length > 0) {
-                            errors.forEach(function(error) {
-                                alert(error);
-                            });
-                        }
-                    }
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Date of Business Establishment</label>
+                                                <input type="date" class="form-control" name="date_of_business_establishment" value="{{ seller.date_of_business_establishment | date:'Y-m-d' }}">
+                                            </div>
+                                        </div>
 
-                    showErrorAlerts(errors);
-                </script>
-            {% endif %}
+                                         <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Address Line 1</label>
+                                                <input type="text" class="form-control" name="address_line_1" value="{{ seller.address_line_1 }}" required>
+                                            </div>
+                                        </div>
 
+                                         <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Address Line 2</label>
+                                                <input type="text" class="form-control" name="address_line_2" value="{{ seller.address_line_2 }}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">City</label>
+                                                <input type="text" class="form-control" name="city" value="{{ seller.city }}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">State</label>
+                                                <input type="text" class="form-control" name="state" value="{{ seller.state }}" required>
+                                            </div>
+                                        </div>
+
+                                      <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Country</label>
+                                            <select class="form-control" name="seller_country" required>
+                                                {% load countries %}
+                                                <option value="" disabled {% if not seller.seller_country %}selected{% endif %}>Select Your Country</option>
+                                                {% for code, name in countries %}
+                                                    <option value="{{ code }}" {% if seller.seller_country == code %}selected{% endif %}>{{ name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Postal Code</label>
+                                                <input type="text" class="form-control" name="postal_code" maxlength="6" value="{{ seller.postal_code }}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Your Website URL (optional)</label>
+                                                <input type="text" class="form-control" name="website_url" value="{{ seller.website_url }}" >
+                                            </div>
+                                        </div>
+
+                                       <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Business Category</label>
+                                                <select class="form-control" name="business_category" required>
+                                                    <option value="" disabled {% if seller.business_category == '' %}selected{% endif %}>Select Business Category</option>
+                                                    <option value="Fashion & Accessories" {% if seller.business_category == 'Fashion & Accessories' %}selected{% endif %}>Fashion & Accessories</option>
+                                                    <option value="Electronics" {% if seller.business_category == 'Electronics' %}selected{% endif %}>Electronics</option>
+                                                    <option value="Home & Kitchen" {% if seller.business_category == 'Home & Kitchen' %}selected{% endif %}>Home & Kitchen</option>
+                                                    <option value="Health & Beauty" {% if seller.business_category == 'Health & Beauty' %}selected{% endif %}>Health & Beauty</option>
+                                                    <option value="Sports & Outdoors" {% if seller.business_category == 'Sports & Outdoors' %}selected{% endif %}>Sports & Outdoors</option>
+                                                    <option value="Toys & Games" {% if seller.business_category == 'Toys & Games' %}selected{% endif %}>Toys & Games</option>
+                                                    <option value="Arts & Crafts" {% if seller.business_category == 'Arts & Crafts' %}selected{% endif %}>Arts & Crafts</option>
+                                                    <option value="Books & Media" {% if seller.business_category == 'Books & Media' %}selected{% endif %}>Books & Media</option>
+                                                    <option value="Other (Specify)" {% if seller.business_category == 'Other (Specify)' %}selected{% endif %}>Other (Specify)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Brand Information</label>
+                                                <textarea class="form-control" name="brand_information" rows="4">{{ seller.brand_information }}</textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Step 3: Documents upload -->
+                                <div class="wizard-tab">
+                            <div class="text-center mb-4">
+                                <h5>Documents</h5>
+                            </div>
+                            <div class="row">
+
+                                <!-- Business Registration Document -->
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Business Registration Document</label>
+                                        {% if documents.business_registration_document %}
+                                            {% if ".pdf" in documents.business_registration_document.url|lower %}
+                                                <a href="{{ documents.business_registration_document.url }}" target="_blank" class="btn btn-primary">View Business Registration Document (PDF)</a>
+                                            {% else %}
+                                                <img src="{{ documents.business_registration_document.url }}" alt="Business Registration Document" class="img-thumbnail" style="width: 100px; height: 100px;">
+                                            {% endif %}
+                                        {% endif %}
+                                        <input type="file" class="form-control" name="business_registration_document" accept=".pdf,image/*">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Business Registration Document Expiry Date</label>
+                                        <input type="date" class="form-control" name="business_registration_document_expiry_date"
+                                               value="{{ documents.business_registration_document_expiry_date|date:'Y-m-d' }}" required>
+                                    </div>
+                                </div>
+
+                                <!-- Tax Identification Document -->
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Tax Identification Document</label>
+                                        {% if documents.tax_identification_document %}
+                                            {% if ".pdf" in documents.tax_identification_document.url|lower %}
+                                                <a href="{{ documents.tax_identification_document.url }}" target="_blank" class="btn btn-primary">View Tax Identification Document (PDF)</a>
+                                            {% else %}
+                                                <img src="{{ documents.tax_identification_document.url }}" alt="Tax Identification Document" class="img-thumbnail" style="width: 100px; height: 100px;">
+                                            {% endif %}
+                                        {% endif %}
+                                        <input type="file" class="form-control" name="tax_identification_document" accept=".pdf,image/*">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Tax Identification Document Expiry Date</label>
+                                        <input type="date" class="form-control" name="tax_identification_document_expiry_date"
+                                               value="{{ documents.tax_identification_document_expiry_date|date:'Y-m-d' }}" required>
+                                    </div>
+                                </div>
+
+                                <!-- Proof of Business Address -->
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Proof of Business Address</label>
+                                        {% if documents.proof_of_business_address %}
+                                            {% if ".pdf" in documents.proof_of_business_address.url|lower %}
+                                                <a href="{{ documents.proof_of_business_address.url }}" target="_blank" class="btn btn-primary">View Proof of Business Address (PDF)</a>
+                                            {% else %}
+                                                <img src="{{ documents.proof_of_business_address.url }}" alt="Proof of Business Address" class="img-thumbnail" style="width: 100px; height: 100px;">
+                                            {% endif %}
+                                        {% endif %}
+                                        <input type="file" class="form-control" name="proof_of_business_address" accept=".pdf,image/*">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Proof of Business Address Expiry Date</label>
+                                        <input type="date" class="form-control" name="proof_of_business_address_expiry_date"
+                                               value="{{ documents.proof_of_business_address_expiry_date|date:'Y-m-d' }}" required>
+                                    </div>
+                                </div>
+
+                                <!-- Authorized Signatory ID -->
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Authorized Signatory ID</label>
+                                        {% if documents.authorized_signatory_id %}
+                                            {% if ".pdf" in documents.authorized_signatory_id.url|lower %}
+                                                <a href="{{ documents.authorized_signatory_id.url }}" target="_blank" class="btn btn-primary">View Authorized Signatory ID (PDF)</a>
+                                            {% else %}
+                                                <img src="{{ documents.authorized_signatory_id.url }}" alt="Authorized Signatory ID" class="img-thumbnail" style="width: 100px; height: 100px;">
+                                            {% endif %}
+                                        {% endif %}
+                                        <input type="file" class="form-control" name="authorized_signatory_id" accept=".pdf,image/*">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Authorized Signatory ID Expiry Date</label>
+                                        <input type="date" class="form-control" name="authorized_signatory_id_expiry_date"
+                                               value="{{ documents.authorized_signatory_id_expiry_date|date:'Y-m-d' }}" required>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                                <!-- Step 4: Bank Details -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Bank Details</h5>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Bank Name</label>
+                                                <input type="text" class="form-control" name="bank_name" value="{{ seller_bank.bank_name }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Bank Account Number</label>
+                                                <input type="text" class="form-control" name="bank_account_number" value="{{ seller_bank.bank_account_number }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Swift/BIC Code</label>
+                                                <input type="text" class="form-control" name="swift_bic_code" value="{{ seller_bank.swift_bic_code }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Account Holder Name</label>
+                                                <input type="text" class="form-control" name="account_holder_name" value="{{ seller_bank.account_holder_name }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Bank Address (optional)</label>
+                                                <textarea class="form-control" name="bank_address" rows="4">{{ seller_bank.bank_address }}</textarea>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Step 5: Team Members -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Team Members</h5>
+                                        <p>Add your team members here (optional)</p>
+                                    </div>
+                                    <div class="row">
+
+                                    <!-- first team member data starts here-->
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_1" value="{{ team_members.full_name_1 }}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_1" value="{{ team_members.teammate_email_1 }}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Team Mate Role</label>
+                                                <select class="form-control" name="teammate_role_1">
+                                                    <option value="" disabled selected {% if team_members.teammate_role_1 == '' %}selected{% endif %}>Team Mate Role</option>
+
+                                                    <option value="Product Manager" {% if team_members.teammate_role_1 == "Product Manager" %}selected{% endif %}>Product Manager</option>
+                                                    <option value="Order Fulfillment" {% if team_members.teammate_role_1 == "Order Fulfillment" %}selected{% endif %}>Order Fulfillment</option>
+                                                    <option value="Finance" {% if team_members.teammate_role_1 == "Finance" %}selected{% endif %}>Finance</option>
+                                                    <option value="Admin" {% if team_members.teammate_role_1 == "Admin" %}selected{% endif %}>Admin</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- second team member data starts here-->
+                                                    <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_2" value="{{ team_members.full_name_2 }}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_2" value="{{ team_members.teammate_email_2 }}" >
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_2">
+                                                        <option value="" disabled selected {% if not team_members.teammate_role_2 %}selected{% endif %}>Team Mate Role</option>
+
+                                                        <option value="Product Manager" {% if team_members.teammate_role_2 == "Product Manager" %}selected{% endif %}>Product Manager</option>
+                                                        <option value="Order Fulfillment" {% if team_members.teammate_role_2 == "Order Fulfillment" %}selected{% endif %}>Order Fulfillment</option>
+                                                        <option value="Finance" {% if team_members.teammate_role_2 == "Finance" %}selected{% endif %}>Finance</option>
+                                                        <option value="Admin" {% if team_members.teammate_role_2 == "Admin" %}selected{% endif %}>Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        <!-- third team member data starts here-->
+                                                    <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_3" value="{{ team_members.full_name_3 }}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_3" value="{{ team_members.teammate_email_3 }}" >
+                                            </div>
+                                        </div>
+                                             <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_3">
+                                                        <option value="" disabled selected {% if not team_members.teammate_role_3 %}selected{% endif %}>Team Mate Role</option>
+
+                                                        <option value="Product Manager" {% if team_members.teammate_role_3 == "Product Manager" %}selected{% endif %}>Product Manager</option>
+                                                        <option value="Order Fulfillment" {% if team_members.teammate_role_3 == "Order Fulfillment" %}selected{% endif %}>Order Fulfillment</option>
+                                                        <option value="Finance" {% if team_members.teammate_role_3 == "Finance" %}selected{% endif %}>Finance</option>
+                                                        <option value="Admin" {% if team_members.teammate_role_3 == "Admin" %}selected{% endif %}>Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        <!-- fourth team member data starts here-->
+                                                    <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_4" value="{{ team_members.full_name_4 }}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_4" value="{{ team_members.teammate_email_4 }}" >
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_4">
+                                                        <option value="" disabled selected {% if not team_members.teammate_role_4 %}selected{% endif %}>Team Mate Role</option>
+
+                                                        <option value="Product Manager" {% if team_members.teammate_role_4 == "Product Manager" %}selected{% endif %}>Product Manager</option>
+                                                        <option value="Order Fulfillment" {% if team_members.teammate_role_4 == "Order Fulfillment" %}selected{% endif %}>Order Fulfillment</option>
+                                                        <option value="Finance" {% if team_members.teammate_role_4 == "Finance" %}selected{% endif %}>Finance</option>
+                                                        <option value="Admin" {% if team_members.teammate_role_4 == "Admin" %}selected{% endif %}>Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        <!-- fifth team member data starts here-->
+                                                    <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="full_name_5" value="{{ team_members.full_name_5 }}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="teammate_email_5" value="{{ team_members.teammate_email_5 }}" >
+                                            </div>
+                                        </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Team Mate Role</label>
+                                                    <select class="form-control" name="teammate_role_5">
+                                                        <option value="" disabled selected {% if not team_members.teammate_role_5 %}selected{% endif %}>Team Mate Role</option>
+
+                                                        <option value="Product Manager" {% if team_members.teammate_role_5 == "Product Manager" %}selected{% endif %}>Product Manager</option>
+                                                        <option value="Order Fulfillment" {% if team_members.teammate_role_5 == "Order Fulfillment" %}selected{% endif %}>Order Fulfillment</option>
+                                                        <option value="Finance" {% if team_members.teammate_role_5 == "Finance" %}selected{% endif %}>Finance</option>
+                                                        <option value="Admin" {% if team_members.teammate_role_5 == "Admin" %}selected{% endif %}>Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                    </div>
+                                </div>
+
+                                <!-- Step 6: Product Upload Method -->
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Product Upload Method</h5>
+                                    </div>
+                                    <div class="row">
+
+                                      <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Product Upload Method</label>
+                                            <select class="form-control" name="upload_method">
+                                                <option value="" disabled {% if not product_upload_method.upload_method %}selected{% endif %}>Select Your Product Upload Method</option>
+
+                                                <option value="Manual Product Upload" {% if product_upload_method.upload_method == "Manual Product Upload" %}selected{% endif %}>Manual Product Upload</option>
+                                                <option value="Bulk Product Upload (CSV/Excel)" {% if product_upload_method.upload_method == "Bulk Product Upload (CSV/Excel)" %}selected{% endif %}>Bulk Product Upload (CSV/Excel)</option>
+                                                <option value="Sync with Existing Website/CRM" {% if product_upload_method.upload_method == "Sync with Existing Website/CRM" %}selected{% endif %}>Sync with Existing Website/CRM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                       <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Preferred Shipping Method</label>
+                                                <select class="form-control" name="preferred_shipping_method">
+                                                    <option value="" disabled selected {% if not product_upload_method.preferred_shipping_method %}selected{% endif %}>Select Your Preferred Shipping Method</option>
+
+                                                    <option value="Self-Managed Shipping" {% if product_upload_method.preferred_shipping_method == "Self-Managed Shipping" %}selected{% endif %}>Self-Managed Shipping</option>
+                                                    <option value="World2Door Shipping Services" {% if product_upload_method.preferred_shipping_method == "World2Door Shipping Services" %}selected{% endif %}>World2Door Shipping Services</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Platform Type (optional)</label>
+                                                <input type="text" class="form-control" name="platform_type" value="{{ product_upload_method.platform_type }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">API Keys (optional)</label>
+                                                <input type="text" class="form-control" name="api_keys" value="{{ product_upload_method.api_keys }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Technical Contact Name (optional)</label>
+                                                <input type="text" class="form-control" name="technical_contact_name" value="{{ product_upload_method.technical_contact_name }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Technical Contact Email (optional)</label>
+                                                <input type="text" class="form-control" name="technical_contact_email" value="{{ product_upload_method.technical_contact_email }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Technical Contact Phone (optional)</label>
+                                                <input type="text" class="form-control" name="technical_contact_phone" value="{{ product_upload_method.technical_contact_phone }}">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <!-- Navigation buttons -->
+                            <div class="d-flex align-items-start gap-3 mt-4">
+                                <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                                <button type="button" class="btn btn-primary ms-auto" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                <button type="submit" class="btn btn-primary ms-auto" id="submitBtn" style="display: none;">Submit</button>
+                            </div>
+
+                        </form>
+
+
+                        {% if messages %}
+                            <script>
+                                const errors = [];
+                                {% for message in messages %}
+                                    errors.push("{{ message }}");
+                                {% endfor %}
+
+                                function showErrorAlerts(errors) {
+                                    if (errors.length > 0) {
+                                        errors.forEach(function(error) {
+                                            alert(error);
+                                        });
+                                    }
+                                }
+
+                                showErrorAlerts(errors);
+                            </script>
+                        {% endif %}
 
                         </div>
                     </div>
