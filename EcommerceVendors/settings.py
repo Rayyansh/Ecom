@@ -81,7 +81,6 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
-<<<<<<< HEAD
 STATIC_ROOT = '/static/'
 
 MEDIA_ROOT = '/media/'
@@ -90,7 +89,6 @@ MEDIA_ROOT = '/media/'
 STATIC_ROOT = 'static/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_ROOT = 'media/'
->>>>>>> 86415f96adfd679cfa064d4b1ec7371248bd61e7
 MEDIA_URL = 'media/'
 
 # STATICFILES_DIRS = [BASE_DIR / 'static']
